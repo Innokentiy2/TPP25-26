@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 class Polynomial
 {
@@ -29,80 +29,25 @@ class Polynomial
 
     public override string ToString()
     {
-        double c = coeffs[0];
-        double b = coeffs[1];
-        double a = coeffs[2];
-        string s = "";
-        if (c > 0)
+        if (this.coeffs.Length == 0) return "0";
+        string res = "";
+        for (int i = 0; i < this.coeffs.Length; i++)
         {
-            s += Convert.ToString(c);
-        }
-        else if (c < 0)
-        {
-            s += "-";
-            s += Convert.ToString(c * (-1));
-        }
-
-        if (s != "")
-        {
-            if (b > 0)
+            if (this.coeffs[i] == 0) continue;
+            if (i == 0) res += this.coeffs[i];
+            else if (i == 1)
             {
-                s += " + ";
-                s += Convert.ToString(b);
-                s += "x";
+                res += this.coeffs[i] < 0 ? " - " : " + ";
+                res += Math.Abs(this.coeffs[i]).ToString() + "x";
             }
-            else if (b < 0)
+            else
             {
-                s += " - ";
-                s += s += Convert.ToString(b * (-1));
-                s += "x";
+                res += this.coeffs[i] < 0 ? " - " : " + ";
+                res += Math.Abs(this.coeffs[i]).ToString() + "x^" + i.ToString();
             }
         }
-        else
-        {
-            if (b > 0)
-            {
-                s += Convert.ToString(b);
-                s += "x";
-            }
-            else if (b < 0)
-            {
-                s += "-";
-                s += Convert.ToString(b * (-1));
-                s += "x";
-            }
-        }
-
-        if (s != "")
-        {
-            if (a > 0)
-            {
-                s += " + ";
-                s += Convert.ToString(a);
-                s += "x^2";
-            }
-            else if (a < 0)
-            {
-                s += " - ";
-                s += Convert.ToString(a * (-1));
-                s += "x^2";
-            }
-            
-        }
-        else
-        {
-            if (a > 0)
-            {
-                s += Convert.ToString(a);
-                s += "x^2";
-            }
-            else if (a < 0)
-            {
-                s += "-";
-                s += s += Convert.ToString(a * (-1));
-                s += "x^2";
-            }
-        }
+        return res;
+    }
 
         /*
         *Метод должен возвращать строковое представление многочлена.
@@ -120,9 +65,8 @@ class Polynomial
         * Пример вывода:
         *     "1 + 2x^2"
         */
-        return s;
     }
-}
+
 
 class Programm
 {
